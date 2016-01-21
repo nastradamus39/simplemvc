@@ -18,7 +18,7 @@ $loader->register();
 /**
  * Include helpers
  */
-require_once("Core/helpers.php");
+require_once("Core/Helpers.php");
 
 ob_start();
 
