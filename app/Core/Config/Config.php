@@ -13,6 +13,16 @@ class Config
 
     private static $viewsPath = null;
 
+    private static $MYSQL_HOST = 'localhost';
+
+    private static $MYSQL_USER = 'root';
+
+    private static $MYSQL_PASSWORD = '';
+
+    private static $MYSQL_DB = 'smvc';
+
+    private static $MYSQL_CONNECTION_CHARSET = 'UTF8';
+
     /**
      * COnfig Singleton
      * @return Config|null
@@ -60,6 +70,21 @@ class Config
     public static function viewsPath()
     {
         return self::$viewsPath;
+    }
+
+    public static function pdoConnectionString()
+    {
+        return "mysql:host=".self::$MYSQL_HOST.";dbname=".self::$MYSQL_DB.";charset=".self::$MYSQL_CONNECTION_CHARSET;
+    }
+
+    public static function mysqlUser()
+    {
+        return self::$MYSQL_USER;
+    }
+
+    public static function mysqlPassword()
+    {
+        return self::$MYSQL_PASSWORD;
     }
 
 }

@@ -20,6 +20,8 @@ $loader->register();
  */
 require_once("Core/helpers.php");
 
+ob_start();
+
 try {
 
     /**
@@ -35,12 +37,12 @@ try {
 
 }catch( \Core\Exceptions\ControllerException $e){
 
-    view('500.error');
+    echo view('500.error');
     exit();
 
 }catch( \Core\Exceptions\Error404 $e){
 
-    view('404.error');
+    echo view('404.error');
     exit();
 
 }

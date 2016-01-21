@@ -6,7 +6,7 @@ namespace Controllers;
 use Core\FrontController;
 use Core\Http\Request;
 use Core\Http\Response;
-
+use Models;
 
 class NewsController extends FrontController{
 
@@ -19,10 +19,15 @@ class NewsController extends FrontController{
         return $response;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $newsModel = new Models\NewsModel();
+
+        $news = $newsModel->fetchAll();
+
         $response = new Response();
-        $content = view('news.list', [ 'page' => 'news', 'news' => ['item1' => 'sasd'] ]);
+        $content = view('news.list', [ 'page' => 'news', 'news' => $news ]);
+
         $response->content($content);
 
         return $response;

@@ -44,6 +44,8 @@ class App {
     {
         $headers = $response->headers();
 
+        ob_clean();
+
         foreach($headers as $header => $value)
             header("{$header}: {$value}");
 

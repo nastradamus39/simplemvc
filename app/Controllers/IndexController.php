@@ -15,6 +15,7 @@ class IndexController extends FrontController{
 
     public function index()
     {
+
         $response = new Response();
         $content = view('index.index', ['content' => "Главная страница" ]);
         $response->content($content);

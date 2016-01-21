@@ -26,7 +26,13 @@ class BaseView {
     {
         $template = Config::viewsPath().str_replace(".", DIRECTORY_SEPARATOR, $this->template).".template.php";
         $data = $this->data;
-        if(is_file($template)) require_once $template;
+
+        ob_start();
+        if(is_file($template))
+            include $template;
+        $content = ob_get_clean();
+
+        return $content;
     }
 
 }
