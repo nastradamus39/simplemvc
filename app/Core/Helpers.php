@@ -23,3 +23,18 @@ if(!function_exists("view")){
         return $view->render();
     }
 }
+
+if(!function_exists("env")){
+    function env($param, $default = null)
+    {
+        $envConfigPath = app_path().".env";
+        $f = file_get_contents($envConfigPath);
+        $env = explode("\n", $f);
+        foreach($env as $envParam){
+            if("" !== $envParam){
+                if( explode("=", $envParam)[0] === $param ) return explode("=", $envParam)[1];
+            }
+        }
+        return $default;
+    }
+}
