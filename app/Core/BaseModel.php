@@ -33,9 +33,4 @@ class BaseModel {
         return $res;
     }
 
-    public function select($onPage, $page)
-    {
-
-    }
-
 }

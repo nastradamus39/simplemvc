@@ -21,12 +21,8 @@ class NewsController extends FrontController{
 
     public function index(Request $request)
     {
-        $newsModel = new Models\NewsModel();
-
-        $news = $newsModel->fetchAll();
-
         $response = new Response();
-        $content = view('news.list', [ 'page' => 'news', 'news' => $news ]);
+        $content = view('news.list', [ 'page' => 'news' ]);
 
         $response->content($content);
 

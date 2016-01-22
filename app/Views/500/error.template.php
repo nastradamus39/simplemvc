@@ -1,6 +1,6 @@
-<? view('layouts.header'); ?>
+<? echo view('layouts.header'); ?>
 
 
     <div class="alert alert-danger" role="alert">Внутренняя ошибка сервера.</div>
 
-<? view('layouts.footer'); ?>
+<? echo view('layouts.footer'); ?>

@@ -1,0 +1,104 @@
+
+<link rel="import" href="/bower_components/polymer/polymer.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/paper-spinner/paper-spinner.html">
+
+<style>
+    paper-spinner {
+        position:absolute;
+        top: 50%;
+        left: 50%;
+    }
+    #main-container{
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    #bedug-container{
+        display: block; margin:30px;
+    }
+</style>
+
+<dom-module name="news-list" attributes="API_BASE_URL">
+
+    <template>
+
+        <iron-ajax id="ajax" handle-as="json" withCredentials="true" on-response="_response"></iron-ajax>
+
+        <nav><ul class="pagination"></ul></nav>
+
+        <template id="newslist" is="dom-repeat" items="{{news}}">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 class="panel-title">{{item.title}}</h3></div>
+                <div class="panel-body">{{item.preview}}<button type="button" class="btn btn-default">Подробнее</button></div>
+            </div>
+        </template>
+
+        <nav><ul class="pagination"></ul></nav>
+
+    </template>
+
+</dom-module>
+
+<script>
+
+    Polymer({
+
+        is: 'news-list',
+
+        properties: {
+            news: Array,
+            page: {
+                type: Number,
+                observer: '_pageChanged'
+            },
+            pagesCount: Number,
+            API_BASE_URL: String
+        },
+
+        ready: function() {
+            this.$.ajax.headers = {};
+            this.$.ajax.method = 'GET';
+            this.request('/news/1');
+        },
+
+        request: function(path){
+            this.$.ajax.url = this.API_BASE_URL+path;
+            this.$.ajax.generateRequest();
+        },
+
+        _response: function(response) {
+            var callback = response.detail.response.method+'_loaded';
+            this[callback](response);
+        },
+
+        newslist_loaded: function(response) {
+            this.news = response.detail.response.result.items;
+            this.pagesCount = response.detail.response.result.pages;
+            this.page = response.detail.response.result.page;
+        },
+
+        _pageClicked: function(page){
+            this.request('/news/'+page);
+            return false;
+        },
+
+        _pageChanged: function() {
+            var mObj = this;
+            var pagesStr = "<li><a href='#' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+            for(var i=1; i <= this.pagesCount; i++){
+                if(this.page == i){
+                    pagesStr += "<li class='active'><a href='#'>"+i+"</a></li>";
+                }else{
+                    pagesStr += "<li><a href='#' page='"+i+"'>"+i+"</a></li>";
+                }
+            }
+            pagesStr += "<li><a href='' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+            $("ul.pagination").html(pagesStr);
+            $("ul.pagination li a").click(function(e){ mObj._pageClicked(parseInt($(e.target).attr('page'))); });
+        }
+
+    });
+
+
+</script>

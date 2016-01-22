@@ -7,3 +7,5 @@
 
 \Core\Route\Route::get('/', 'IndexController@index');
 
+\Core\Route\Route::get('/api/v1/news/{page}', 'ApiController@index');
+

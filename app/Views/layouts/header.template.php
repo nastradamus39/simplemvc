@@ -19,6 +19,11 @@
     <!-- polymer -->
     <script src="/bower_components/webcomponentsjs/webcomponents.js"></script>
     <!-- polymer -->
+
+    <!-- polymer elements -->
+    <link rel="import" href="/elements/newslist.html">
+    <!-- polymer elements -->
+
 </head>
 
 <body>
