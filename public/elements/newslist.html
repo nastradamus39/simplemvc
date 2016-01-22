@@ -59,7 +59,7 @@
         ready: function() {
             this.$.ajax.headers = {};
             this.$.ajax.method = 'GET';
-            this.request('/news/1');
+            this.request('news/1');
         },
 
         request: function(path){
@@ -79,7 +79,7 @@
         },
 
         _pageClicked: function(page){
-            this.request('/news/'+page);
+            this.request('news/'+page);
             return false;
         },
 
