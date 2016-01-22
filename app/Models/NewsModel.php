@@ -4,6 +4,7 @@
 namespace Models;
 
 use Core\BaseModel;
+use PDO;
 
 class NewsModel extends BaseModel{
 
